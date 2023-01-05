@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import moment from "moment";
 
 const api = {
   key: "847fe7f05d4f2e00e711ba4f61157d24",
-  base: "https://api.openweathermap.org/data/2.5/"
+  url: "https://api.openweathermap.org/data/2.5/",
 };
 
 function App() {
@@ -12,17 +11,15 @@ function App() {
 
   const search = (evt) => {
     if (evt.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then(res => res.json())
-        .then(result => {
+      fetch(`${api.url}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then((res) => res.json())
+        .then((result) => {
           setWeather(result);
           setQuery("");
           console.log(result);
         });
     }
   };
-
-  var currentTime = moment().format("hh:mm a");
 
   return (
     <div className="App">
@@ -31,22 +28,50 @@ function App() {
           <input
             type="text"
             className="search-bar"
-            placeHolder="Enter a location (city, country)"
+            placeHolder="Enter a location (e.g. Sydney)"
             onChange={(e) => setQuery(e.target.value)}
             value={query}
             onKeyPress={search}
           />
         </div>
-        <div className="time">{currentTime}</div>
         {typeof weather.main != "undefined" ? (
-          <div>
+          <div className="results">
             <div className="location">
               {weather.name}, {weather.sys.country}
             </div>
-            <div className="temperature">{Math.round(weather.main.temp)}°</div>
+            <div className="temperature">
+              <div className="actual-temp">
+                {Math.round(weather.main.temp)}°C
+              </div>
+              <div className="feels-like-temp">
+                Feels like: {Math.round(weather.main.feels_like)}°C
+              </div>
+            </div>
             <div className="weather-condition">{weather.weather[0].main}</div>
+            <div className="minor-info">
+            <div className="humidity">
+              <div>Humidity</div> <div>{weather.main.humidity}%</div>
+            </div>
+            <div className="pressure">
+              <div>Pressure</div> <div>{weather.main.pressure} hPa</div>
+            </div>
+            <div className="sunrise">
+              <div>Sunrise </div>
+              <div>
+                {new Date(weather.sys.sunrise * 1000).toLocaleTimeString("en")}
+              </div>
+            </div>
+            <div className="sunset">
+              <div>Sunset </div>
+              <div>
+                {new Date(weather.sys.sunset * 1000).toLocaleTimeString("en")}
+              </div>
+            </div>
+            </div>
           </div>
-        ) : ("")}
+        ) : (
+          ""
+        )}
       </main>
     </div>
   );

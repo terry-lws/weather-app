@@ -7,11 +7,13 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
+  
 }
 
 main {
+  display: block;
   min-height: 100vh;
-  padding: 100px;
+  padding: 40px;
 }
 
 .search-box {
@@ -22,10 +24,10 @@ main {
   display: block;
   width: 100%;
   padding: 15px;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
   border-radius: 20px;
   background-color: rgba(212, 211, 211, 0.8);
-  font-size: 20px;
+  font-size: 15px;
   border: none;
   outline: none;
   transition: 0.3s ease;
@@ -44,12 +46,46 @@ main {
   color: rgb(212, 211, 211);
 }
 
-.time, .location, .temperature, .weather-condition {
+.results {
   color: rgb(53, 53, 53);
   text-align: center;
   font-size: 40px;
 }
 
+.location {
+  padding: 10px;
+}
+
 .temperature {
-  padding: 20px;
+  border: 2px black solid;
+  border-radius: 15px;
+  margin: 15px;
+  padding: 10px;
+}
+
+.temperature .actual-temp {
+  font-size: 60px;
+}
+
+.temperature .feels-like-temp {
+  font-size: 20px;
+}
+
+.weather-condition {
+  padding: 10px;
+}
+
+.humidity, .pressure, .sunrise, .sunset {
+  display: flex;
+  justify-content: space-between;
+  
+  padding: 10px;
+}
+
+.minor-info {
+  font-size: 20px;
+  margin-top: 10px;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 15px;
 }
