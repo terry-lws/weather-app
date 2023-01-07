@@ -1,2 +1,2 @@
 # weather-app
- Personal project - weather app
+ React.js Weather app
